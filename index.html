@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>How I Learned to Love Unit Testing</title>
+		<title>Unit Testing</title>
 
 		<meta name="description" content="Some talk on Unit Testing">
 		<meta name="author" content="Ross Hettel">
@@ -16,6 +16,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -43,7 +44,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Unit Testing</h1>
+					<h1>Automated Testing</h1>
 					<h3>It's really not that hard</h3>
 				</section>
 
@@ -51,80 +52,197 @@
 					<h4>But first, a disclaimer:</h4>
 					<h1 class="fragment">My Code Sucks.</h1>
 					<h3 class="fragment">And yours does too.</h3>
+					<!-- this is why we do testing, and why we have QA -->
 				</section>
 
-				<!-- Example of nested vertical slides -->
+				<section>
+					<h2>The Automated Testing Pyramid</h2>
+					<img src="http://placegoat.com/600">
+				</section>
+
 				<section>
 					<section>
-						<h2>So what is Unit Testing?</h2>
+						<h2>QA / Acceptance Testing</h2>
 						<ul>
-							<li>It's testing (duh) an isolated piece of code</li>
-							<li>Isolated piece could be a function, class, or method</li>
-							<li>Basic idea is to give a function some input, and then validate its output</li>
+							<li>Not _really_ automated testing</li>
+							<li>But very important, because humans are always verifying expected behavior</li>
+							<li>This is testing done from a customers perspective</li>
 						</ul>
-
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+						<h3>Advantages</h3>
+						<ul>
+							<li>Ensures that our software, as a whole, is correct</li>
+						</ul>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+						<h3>Disadvantages</h3>
+						<ul>
+							<li>So far removed from the code, very hard to pinpoint where bugs are</li>
+							<li>Requires humans</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Integration Tests</h2>
+						<ul>
+							<li>Testing larger pieces of code, more than what unit tests touch</li>
+							<li>For example, any test that calls one of our services via HTTP</li>
+						</ul>	
 					</section>
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h3>Advantages</h3>
+						<ul>
+							<li>Catches "wiring" bugs that unit tests may miss</li>
+							<li>Also catches most environmental bugs, because we're not testing the code in a vacuum</li>
+							<li>More of a "real world" test, because that's howw the serivce gets used</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Disadvantages</h3>
+						<ul>
+							<li>Touches a lot of code, thus hard to pinpoint where the failure is</li>
+							<li>Don't necessarily prove that something works, because we don't check the inner details</li>
+						</ul>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
+					<section>
+						<h2>Unit Tests</h2>
+						<ul>
+							<li>Testing the smallest piece of code in isolation</li>
+							<li>Isolation means no file system or network connectivity, those can be mocked (more on this later)</li>
+							<li>In contrast to QA, this is testing done from a programmers perspective</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Advantages</h3>
+						<ul>
+							<li>Easily isolates and pinpoints bugs</li>
+							<li>Proves the very basic building blocks of our application work</li>
+							<li>Quick to write and execute</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Disadvantages</h3>
+						<ul>
+							<li>Only focuses on code in isolation, can't catch bugs when units of code are combined</li>
+							<li>Feels like you're writing twice as much code</li>
+						</ul>
+					</section>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<h2>OK, but why are we doing this?</h2>
+					The most expensive part of software development is maintenance.
+					And if one of our values is "Move Fast and Break Things", we want to minimize the effects of breaking things.
+				</section>
+
+				<section data-background="img/code.jpg">
+					<h1 class="transparent">Let's look at a unit test</h1>
+				</section>
+
+				<section data-background="img/code.jpg">
+					<h1 class="transparent">Let's look at an integration test</h1>
 				</section>
 
 				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
+					<section>
+						<h2>Tools for Unit Testing</h2>	
+					</section>
+					
+					<section>
+						<h2>Nock</h2>
+						<p>For when you want to test something that makes HTTP calls</p>
+						<p><a href="https://github.com/pgte/nock">https://github.com/pgte/nock</a></p>
+						<br/>
+						<h3>Example</h3>
+						<pre><code data-trim contenteditable>
+it('should make a request to yammer', function (done) {
+    var fakeRequest = nock('https://yammer.com')
+            .get('/oauth2/access_token.json')
+            .reply(200, { token: 'foobar' });
+
+    yammerHelper.getToken(params, function (err, data) {
+
+    assert(fakeRequest.isDone());
+    done();	
+});
+					</code></pre>
+					</section>
+
+					<section>
+						<h2>Sinon</h2>
+						<p>Used for spying, stubbing, and mocking out other code</p>
+						<p><a href="http://sinonjs.org/">http://sinonjs.org/</a></p>
+					</section>
+					<section>
+						<h3>Spies</h3>
+						<p>Testing that a function was called</p>
+						<pre><code data-trim contenteditable>
+it('calls the original function only once', function () {
+    var callback = sinon.spy();
+    var proxy = once(callback);
+
+    proxy();
+    proxy();
+
+    assert(callback.calledOnce);
+});
+						</code></pre>
+						<p>Other uses: check that a new EventBus event was created, check that a call to the db was made</p>
+					</section>
+					<section>
+						<h2>Stubs</h2>
+						<p>Like a spy, but we can control its behavior. Basically, we replace the function with our own.</p>
+						<pre><code data-trim contenteditable>
+it('should update items image and delete old image', function (done) {
+    params.ItemId = productItems.ProductItem1.hgId;
+    params.newProductImage = "doge.jpg";
+
+    var stub = sinon.stub(s3Util, "deleteS3File", function(imagePath, callback) {
+        callback(null, imagePath);
+    });
+
+    ProductItemInternalService.UpdateProductItemImage(params, function (err, item) {
+        assert(item.ProductImageFile, "doge.jpg");
+        assert(stub.calledOnce);
+        done();
+    });
+});
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Fixtures</h2>
+						<p>Prepopulate the database before test suite is run with predefined data.</p>
+						<p>This guarantees the same data for every test</p>
+						<p>See [fill this in later] unit test for an example</p>
+					</section>
 				</section>
 
 				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
+					<section>
+						<h2>Code Coverage</h2>
+						<p>For backend coverage, run <code class="inline">npm run backendcoverage</code>.</p>
+						<p>For frontend coverage run <code class="inline">npm run frontendcoverage</code>.</p>
+					</section>
+					
+					<section>
+						<p>Right now coverage is horrible</p>
+						<dl>
+							<dd>Front End</dd><dt>27%</dt>
+							<dd>Back End</dd><dt>1.8%</dt>
+						</dl>
+					</section>
 
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
+					<section>
+						<p>Don't just write one test for a function, we need to cover every</p>
+						<a href="file:///Users/rosshettel/Code/hgapp/coverage/lcov-report/framework/ConnectionCache.js.html">Here's an example</a> of not 
+					</section>
 				</section>
 
 				<section data-markdown>
