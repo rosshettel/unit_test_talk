@@ -1,175 +1,178 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-		<title>Unit Testing</title>
+        <title>Unit Testing</title>
 
-		<meta name="description" content="Some talk on Unit Testing">
-		<meta name="author" content="Ross Hettel">
+        <meta name="description" content="Some talk on Unit Testing">
+        <meta name="author" content="Ross Hettel">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
-		<link rel="stylesheet" type="text/css" href="css/custom.css">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
 
-	<body>
+    <body>
 
-		<div class="reveal">
+        <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Automated Testing</h1>
-					<h3>Is really not that hard</h3>
-				</section>
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>Automated Testing</h1>
+                    <h3>Is really not that hard</h3>
+                </section>
 
-				<section>
-					<h4>But first, a disclaimer:</h4>
-					<h1 class="fragment">My Code Sucks.</h1>
-					<h3 class="fragment">And yours does too.</h3>
-					<!-- this is why we do testing, and why we have QA -->
-				</section>
+                <section>
+                    <h4>But first, a disclaimer:</h4>
+                    <h1 class="fragment">My Code Sucks.</h1>
+                    <h3 class="fragment">And yours does too.</h3>
+                </section>
 
-				<section>
-					<h2>The Automated Testing Pyramid</h2>
-					<img src="img/test_pyramid_before.png" height="600px">
-				</section>
+                <section>
+                    <h2>Types of Software Testing</h2>
+                    <ul>
+                        <li class="fragment"><h3>QA / Acceptance Testing</h3></li>
+                        <li class="fragment"><h3>Integration Testing</h3></li>
+                        <li class="fragment"><h3>Unit Testing</h2></l3>
+                    </ul>
+                </section>
 
-				<section>
-					<h2>The Automated Testing Pyramid</h2>
-					<img src="img/test_pyramid_after.png" height="600px">
-				</section>
+                <section>
+                    <section>
+                        <h2>QA / Acceptance Testing</h2>
+                        <ul>
+                            <li>Not <i>really</i> automated testing</li>
+                            <li>But very important, because humans are always verifying expected behavior</li>
+                            <li>This is testing done from a customers perspective</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Ensures that our software, as a whole, is correct</li>
+                            <li>Humans validate the output</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Disadvantages</h3>
+                        <ul>
+                            <li>So far removed from the code, very hard to pinpoint where bugs are</li>
+                            <li>Requires humans</li>
+                        </ul>
+                    </section>
+                </section>
 
+                <section>
+                    <section>
+                        <h2>Integration Tests</h2>
+                        <ul>
+                            <li>Testing larger pieces of code, more than what unit tests touch</li>
+                            <li>For example, any test that calls one of our services via HTTP</li>
+                        </ul>   
+                    </section>
+                    <section>
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Catches "wiring" bugs that unit tests may miss</li>
+                            <li>Also catches most environmental bugs, because we're not testing the code in a vacuum</li>
+                            <li>More of a "real world" test, because that's how the serivce gets used</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Disadvantages</h3>
+                        <ul>
+                            <li>Touches a lot of code, thus hard to pinpoint where the failure is</li>
+                            <li>Don't necessarily prove that something works, because we don't check the inner details</li>
+                            <li>In other words, we're only look at the final output, unaware of any side effects</li>
+                        </ul>
+                    </section>
 
+                    <section data-background="img/code.jpg">
+                        <h1 class="transparent">Let's look at an integration test</h1>
+                        <code class="inline">/hgapp/hgnode/test/services/GroupService.js</code>
+                    </section>
+                </section>
 
-				<section>
-					<section>
-						<h2>QA / Acceptance Testing</h2>
-						<ul>
-							<li>Not _really_ automated testing</li>
-							<li>But very important, because humans are always verifying expected behavior</li>
-							<li>This is testing done from a customers perspective</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Advantages</h3>
-						<ul>
-							<li>Ensures that our software, as a whole, is correct</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Disadvantages</h3>
-						<ul>
-							<li>So far removed from the code, very hard to pinpoint where bugs are</li>
-							<li>Requires humans</li>
-						</ul>
-					</section>
-				</section>
+                <section>
+                    <section>
+                        <h2>Unit Tests</h2>
+                        <ul>
+                            <li>Testing the smallest piece of code in isolation</li>
+                            <li>Isolation means no file system or network connectivity, those can be mocked (more on this later)</li>
+                            <li>In contrast to QA, this is testing done from a programmers perspective</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Advantages</h3>
+                        <ul>
+                            <li>Easily isolates and pinpoints bugs</li>
+                            <li>Proves the very basic building blocks of our application work</li>
+                            <li>Quick to write and execute</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Disadvantages</h3>
+                        <ul>
+                            <li>Only focuses on code in isolation, can't catch bugs when units of code are combined</li>
+                            <li>Feels like you're writing twice as much code</li>
+                        </ul>
+                    </section>
 
-				<section>
-					<section>
-						<h2>Integration Tests</h2>
-						<ul>
-							<li>Testing larger pieces of code, more than what unit tests touch</li>
-							<li>For example, any test that calls one of our services via HTTP</li>
-						</ul>	
-					</section>
-					<section>
-						<h3>Advantages</h3>
-						<ul>
-							<li>Catches "wiring" bugs that unit tests may miss</li>
-							<li>Also catches most environmental bugs, because we're not testing the code in a vacuum</li>
-							<li>More of a "real world" test, because that's how the serivce gets used</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Disadvantages</h3>
-						<ul>
-							<li>Touches a lot of code, thus hard to pinpoint where the failure is</li>
-							<li>Don't necessarily prove that something works, because we don't check the inner details</li>
-							<li>In other words, we're only look at the final output, unaware of any side effects</li>
-						</ul>
-					</section>
-				</section>
+                    <section data-background="img/code.jpg">
+                        <h1 class="transparent">Let's look at a unit test</h1>
+                        <code class="inline">/hgapp/hgnode/test/services/internal/Provision.js</code>
+                    </section>
+                </section>
 
-				<section>
-					<section>
-						<h2>Unit Tests</h2>
-						<ul>
-							<li>Testing the smallest piece of code in isolation</li>
-							<li>Isolation means no file system or network connectivity, those can be mocked (more on this later)</li>
-							<li>In contrast to QA, this is testing done from a programmers perspective</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Advantages</h3>
-						<ul>
-							<li>Easily isolates and pinpoints bugs</li>
-							<li>Proves the very basic building blocks of our application work</li>
-							<li>Quick to write and execute</li>
-						</ul>
-					</section>
-					<section>
-						<h3>Disadvantages</h3>
-						<ul>
-							<li>Only focuses on code in isolation, can't catch bugs when units of code are combined</li>
-							<li>Feels like you're writing twice as much code</li>
-						</ul>
-					</section>
-				</section>
+                <section>
+                    <h2>The Automated Testing Pyramid</h2>
+                    <img src="img/test_pyramid_before.png" height="600px">
+                </section>
 
-				<section>
-					<h2>OK, but why are we doing this?</h2>
-					The most expensive part of software development is maintenance.
-					And if one of our values is "Move Fast and Break Things", we want to minimize the effects of breaking things.
-				</section>
+                <section>
+                    <h2>The Automated Testing Pyramid</h2>
+                    <img src="img/test_pyramid_after.png" height="600px">
+                </section>
 
-				<section data-background="img/code.jpg">
-					<h1 class="transparent">Let's look at a unit test</h1>
-				</section>
+                <section>
+                    <h2>Tools for Testing</h2>  
+                </section>
 
-				<section data-background="img/code.jpg">
-					<h1 class="transparent">Let's look at an integration test</h1>
-				</section>
-
-				<section>
-					<h2>Tools for Unit Testing</h2>	
-				</section>
-
-				<section>				
-					<section>
-						<h2>Nock</h2>
-						<p>For when you want to test something that makes HTTP calls</p>
-						<p><a href="https://github.com/pgte/nock">https://github.com/pgte/nock</a></p>
-					</section>
-					<section>
-						<h3>Example</h3>
-						<pre><code data-trim contenteditable>
+                <section>               
+                    <section>
+                        <h2>Nock</h2>
+                        <p>For when you want to test something that makes HTTP calls</p>
+                        <p><a href="https://github.com/pgte/nock">https://github.com/pgte/nock</a></p>
+                    </section>
+                    <section>
+                        <h3>Example</h3>
+                        <pre><code data-trim contenteditable>
 it('should make a request to yammer', function (done) {
     var fakeRequest = nock('https://yammer.com')
             .get('/oauth2/access_token.json')
@@ -177,24 +180,24 @@ it('should make a request to yammer', function (done) {
 
     yammerHelper.getToken(params, function (err, data) {
         assert(fakeRequest.isDone());
-        done();	
+        done(); 
     });
 }
-						</code></pre>
-						<p><small>(code from <code class="inline">/hgnode/test/helpers/YammerHelperTest.js</code>)</small></p>
-					</section>
-				</section>
+                        </code></pre>
+                        <p><small>(code from <code class="inline">/hgnode/test/helpers/YammerHelperTest.js</code>)</small></p>
+                    </section>
+                </section>
 
-				<section>
-					<section>
-						<h2>Sinon</h2>
-						<p>Used for spying, stubbing, and mocking out other code</p>
-						<p><a href="http://sinonjs.org/">http://sinonjs.org/</a></p>
-					</section>
-					<section>
-						<h3>Spies</h3>
-						<p>Testing that a function was called</p>
-						<pre><code data-trim contenteditable>
+                <section>
+                    <section>
+                        <h2>Sinon</h2>
+                        <p>Used for spying, stubbing, and mocking out other code</p>
+                        <p><a href="http://sinonjs.org/">http://sinonjs.org/</a></p>
+                    </section>
+                    <section>
+                        <h3>Spies</h3>
+                        <p>Testing that a function was called</p>
+                        <pre><code data-trim contenteditable>
 it('calls the original function only once', function () {
     var callback = sinon.spy();
     var proxy = once(callback);
@@ -204,13 +207,13 @@ it('calls the original function only once', function () {
 
     assert(callback.calledOnce);
 });
-						</code></pre>
-						<p>Other uses: check that a new EventBus event was created, check that a call to the db was made</p>
-					</section>
-					<section>
-						<h3>Stubs</h3>
-						<p>Like a spy, but we can control its behavior. Basically, we replace the function with our own.</p>
-						<pre><code data-trim contenteditable>
+                        </code></pre>
+                        <p>Other uses: check that a new EventBus event was created, check that a call to the db was made</p>
+                    </section>
+                    <section>
+                        <h3>Stubs</h3>
+                        <p>Like a spy, but we can control its behavior. Basically, we replace the function with our own.</p>
+                        <pre><code data-trim contenteditable>
 it('should update items image and delete old image', function (done) {
     params.ItemId = productItems.ProductItem1.hgId;
     params.newProductImage = "doge.jpg";
@@ -225,30 +228,88 @@ it('should update items image and delete old image', function (done) {
         done();
     });
 });
-						</code></pre>
-						<p><small>(code from<code class="inline">/hgnode/test/services/internal/ProductItemInternalTest.js</code>)</small></p>
-					</section>
-				</section>
+                        </code></pre>
+                        <p><small>(code from<code class="inline">hgapp/hgnode/test/services/internal/ProductItemInternalTest.js</code>)</small></p>
+                    </section>
+                </section>
 
-				<section>
-					<h2>Fixtures</h2>
-					<p>Prepopulate the database before test suite is run with predefined data.</p>
-					<p>This guarantees the same data for every test</p>
-					<p>See [fill this in later] unit test for an example</p>
-				</section>	
+                <section>
+                    <section>
+                        <h2>Fixtures</h2>
+                        <p>Prepopulate the database before test suite is run with predefined data.</p>
+                        <p>This guarantees the same data for every test.</p>
+                        <code class="inline">/hgapp/hgnode/test/fixtures/</code>
+                    </section>
 
-				<section>
-					<section>
-						<h2>Code Coverage</h2>
-                        <p>Right now, our code coverage is pretty abysmal.</p>
-                    	<img src="img/coverage.jpg">
+                    <section>
+                        <h3>Caveat</h3>
+                        <p>Only available for unit tests for the time being, hopefully will be working for integration tests soon!</p>
+                    </section>
+
+                    <section>
+                        <h3>Example</h3>
+                        <p><code class="inline">/hgapp/hgnode/test/services/internal/ProductItemInternalTest.js</code></p>
+                        <p><code class="inline">/hgapp/hgnode/test/fixtures/ProductItem.js</code></p>
+                    </section>
+                    
+                </section>
+
+                <section>
+                    <section>
+                        <h2>HGSession <small>(superagent)</small></h2>
+
+                        <p>Wrapper for Superagent, an HTTP testing tool. Keeps a session alive, and helper methods for logging in and out.</p>
+                        <p><i>By no means complete, help improve it!</i></p>
+                        <br/>
+                        <code class="inline">/hgapp/hgnode/test/helper/HGSession.js</code>
+
+
+                    </section>
+                    
+                    <section>
+                        <h3>Example</h3>
+                        <pre><code data-trim contenteditable>
+var HGSession = require('hgapp/hgnode/test/helper/HGSession'),
+    session = new HGSession();
+
+define('Some awesome integration test', function () {
+    before(function (done) {
+        session.LoginAsCu(done);
+    });
+    after(function (done) {
+        session.Logout(done);
+    });
+
+    it('should test something AWESOME!', function (done) {
+        session.request.get('blah blah blah');
+    });
+});
+                        </code></pre>    
+                    </section>
+                </section>
+
+                <section>
+                    <h3>OK, but why are we doing this?</h3>
+                    <br/>
+                    <h2 class="fragment"><b>The most expensive part of <br/>software development is maintenance</b></h2>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Code Coverage</h2>
+                        <p>Right now, our code coverage makes Gus cry.</p>
+                        <img src="img/coverage.jpg">
 
                         <p><small>(All coverage data collected 8/13/14)</small></p>
-                        
+
                         <p>Target for most mature projects is at least 80%</p>
-					</section>
-					
-					<section>
+                    </section>
+
+                    <section>
+                        <img src="img/tests_yo.jpg">
+                    </section>
+                    
+                    <section>
                         <h3>How to check code coverage</h3>
                         <h4>Coverage Stats</h4>
                         <p>Exists in two folders: </p>
@@ -258,52 +319,52 @@ it('should update items image and delete old image', function (done) {
                         <h4>Helper commands</h4>
                         <p>For backend coverage, run <code class="inline">$ npm run backendcoverage</code>.</p>
                         <p>For frontend coverage, run <code class="inline">$ npm run frontendcoverage</code>.</p>  
-						
-					</section>
+                        
+                    </section>
 
-					<section>
+                    <section>
                         <h3>Branch Coverage</h3>
-						<p>Don't just write one test for a function, we need to cover every possible code execution path, or <em>branches</em>.</p>
-						<a href="file:///Users/rosshettel/Code/hgapp/coverage/lcov-report/framework/ConnectionCache.js.html">Here's an example</a> of not covering every execution path.
-					</section>
-				</section>
+                        <p>Don't just write one test for a function, we need to cover every possible code execution path, or <em>branches</em>.</p>
+                        <a target="_blank" href="file:///Users/rosshettel/Code/hgapp/coverage/lcov-report/framework/ConnectionCache.js.html">Here's an example</a> of not covering every execution path.
+                    </section>
+                </section>
 
-			</div>
+            </div>
 
-		</div>
+        </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
 
-		<script>
+        <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
 
-		</script>
+        </script>
 
-	</body>
+    </body>
 </html>

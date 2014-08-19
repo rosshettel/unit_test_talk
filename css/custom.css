@@ -19,3 +19,7 @@ code.inline:before, code.inline:after {
 	letter-spacing: -0.2em;
 	content: "\00a0";
 }
+
+.reveal pre {
+	width: 100% !important;
+}
